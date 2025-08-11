@@ -1,27 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<!-- Project settings -->
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>dev.brachtendorf</groupId>
-	<artifactId>UtilityCode</artifactId>
-	<version>2.0.1</version>
 
-	<name>Utility Code</name>
-	<description>Common functionality</description>
-	<url>https://github.com/KilianB/UtilityCode</url>
+	<groupId>io.github.hbchbw</groupId>
+	<artifactId>utilitycode-java8-backport</artifactId>
+	<version>1.0.0</version>
 
+	<name>Java 8 Compatible Backport of Utility Code</name>
+	<description>A Java 8 compatible backport of UtilityCode, a selection of java utility methods</description>
+	<url>https://github.com/hbchbw/utilitycode-java8-backport</url>
 
 	<scm>
-		<connection>scm:git:git://github.com/KilianB/UtilityCode.git</connection>
-		<developerConnection>scm:git:ssh://github.com/KilianB/UtilityCode.git</developerConnection>
-		<url>https://github.com/KilianB/UtilityCode</url>
+		<connection>scm:git:git://github.com/hbchbw/utilitycode-java8-backport.git</connection>
+		<developerConnection>scm:git:ssh://github.com/hbchbw/utilitycode-java8-backport.git</developerConnection>
+		<url>https://github.com/hbchbw/utilitycode-java8-backport</url>
 	</scm>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javac.target>11</javac.target>
-	</properties>
 
 	<licenses>
 		<license>
@@ -33,38 +29,25 @@
 
 	<developers>
 		<developer>
-			<name>Kilian Brachtendorf</name>
-			<email>Kilian@brachtendorf.dev</email>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>Europe/Berlin</timezone>
-			<organization>Brachtendorf Apps</organization>
-			<organizationUrl>https://brachtendorf.dev</organizationUrl>
+			<id>hbchbw</id>
+			<name>Yuxuan Qiu</name>
+			<email>yxqiu1997@outlook.com</email>
+			<url>https://github.com/hbchbw</url>
 		</developer>
 	</developers>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javac.target>8</javac.target>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>dev.brachtendorf</groupId>
-			<artifactId>pcg-java-10</artifactId>
+			<artifactId>pcg-java-8</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-graphics</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-swing</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-
-		<!-- Testing -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -86,25 +69,24 @@
 			<scope>test</scope>
 		</dependency>
 
-
 	</dependencies>
 
-	<!-- Build settings -->
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>${javac.target}</source>
-					<target>${javac.target}</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.3.0</version>
 				<configuration>
-					<additionalOptions>-html5</additionalOptions>
+					<source>8</source>
 				</configuration>
 				<executions>
 					<execution>
@@ -115,6 +97,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>3.2.0</version>
@@ -127,21 +110,21 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.8.0</version>
 				<extensions>true</extensions>
 				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					<publishingServerId>ossrh</publishingServerId>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
+				<version>3.2.4</version>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
@@ -149,13 +132,34 @@
 						<goals>
 							<goal>sign</goal>
 						</goals>
+						<configuration>
+							<gpgArguments>
+								<arg>--pinentry-mode</arg>
+								<arg>loopback</arg>
+							</gpgArguments>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>shade-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<shadedClassifierName>all</shadedClassifierName>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -170,4 +174,5 @@
 			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+
 </project>
