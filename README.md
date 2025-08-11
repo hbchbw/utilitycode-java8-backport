@@ -1,4 +1,4 @@
-# jimagehash-java8-backport
+# utilitycode-java8-backport
 
 [![License](https://img.shields.io/github/license/hbchbw/utilitycode-java8-backport.svg)](LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.hbchbw/utilitycode-java8-backport.svg)](https://search.maven.org/search?q=g:io.github.hbchbw%20AND%20a:utilitycode-java8-backport)
